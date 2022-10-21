@@ -1,5 +1,7 @@
 #!/bin/sh
+# better to use the non-ros version of this package to do the calibration
 echo "To calibrate the magnetometer, start rotating the IMU through "
 echo "as many different orientations as possible."
-minimu9-ahrs --mode raw $@ | head -n2000 | minimu9-ahrs-calibrator > ~/.minimu9-ahrs-cal
+rosrun minimu9_ahrs minimu9-ahrs --mode raw -b /dev/i2c-1 $@ | head -n2000 | rosrun minimu9_ahrs minimu9-ahrs-calibrator.py > ~/.minimu9-ahrs-cal
+
 
